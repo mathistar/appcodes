@@ -1,0 +1,41 @@
+CREATE (sthk:Application {code:'STHK', name:'Statement Management @ Real Time (SMQRT) Hong Kong', owner:'Phoebe Ka Po LAU', tech:'Venkatesh REK'})
+CREATE (stin:Application {code:'STIN', name:'Statement Management @ Real Time (SMQRT) India', owner:'Ramesh MALLYA', tech:'Venkatesh REKADI'})
+CREATE (stinaws:Application {code:'STIN-AWS', name:'Statement Management @ Real Time (India) AWS', owner:'Chintan CHHEDA', tech:'Saunak MALLIK'})
+CREATE (stg:Application {code:'STSG', name:'Statement Management @ Real Time (SMQRT) Singapore', owner:'Kah Leong LUI', tech:'Venkatesh REKADI'})
+CREATE (tbmo:Application {code:'TeNO', name:'TENS Online', owner:'Robin Chee Beng YAP', tech:'Fucai GONG'})
+CREATE (tbmr:Application {code:'TENP', name:'India IBMS', owner:'Ramesh MALLYA', tech:'Fucai GONG'})
+CREATE (tbms:Application {code:'IBMS', name:'Transaction Business Management System', owner:'Robin Chee Beng YAP', tech:'Fucai GONG'})
+CREATE (tphk:Application {code:'TPHK', name:'Transaction Pricing (Hong Kong)', owner:'Frances Wai Han HUI', tech:'Fucai GONG'})
+CREATE (tpid:Application {code:'TPID', name:'Smart Pricing- Xelerate', owner:'Lieke LIMANTORO', tech:'Fucai GONG'})
+CREATE (tein:Application {code:'TPIN', name:'Transaction Pricing India', owner:'Ramesh MALLYA', tech:'Fucai GONG'})
+CREATE (estat:Application {code:'eSTNT', name:'Electronic Statements', owner:'Robin Chee Beng YAP'})
+CREATE (avalog:Application {code:'Avalog', name:'Avalog Banking System'})
+CREATE (tadm:Application {code:'TADM', name:'TMO Admin' })
+CREATE (tswb:Application {code:'TSWB',name:'T&M Sales Workbench'})
+CREATE (ibgdw:Application {code:'IBGDW', name:'IBG Digital Workbench'})
+CREATE (aos:Application {code:'AOS', name:'Account Opening System'})
+CREATE (leaps:Application {code:'LEAPS', name:'Loan Evaluation and Application Program'})
+CREATE (osca:Application {code:'OSCA', name:'Online System for Credit Application'})
+CREATE (gcaa:Application {code:'GCAA', name:'Global Credit Workbench Application'})
+CREATE (tds:Application {code:'TDS', name:'Transactional Data Store'})
+CREATE (fc:Application {code:'FC', name:'Financial Consolidator'})
+CREATE (cmcp:Application {code:'CMCP', name:'Customer Master for Cloud platform'})
+CREATE (sigplmsg:Application {code:'SIGPLMSG', name:'Signature Platform Singapore'})
+CREATE (gcin:Application {code:'GCIN', name:'Global Customer Identification Number'})
+CREATE (estmt:Application {code:'ESTMT', name:'E-Statement'})
+CREATE
+(cmcp)-[:REST_API]->(gcin),
+(tadm)-[:REST_API]->(gcin),
+(tswb)-[:KAFKA]->(gcin),
+(ibgdw)-[:REST_API]->(gcin),
+(aos)<-[:KAFKA]-(gcin),
+(aos)-[:REST_API]->(gcin),
+(osca)-[:REST_API]->(gcin),
+(leaps)-[:REST_API]->(gcin),
+(gcaa)<-[:KAFKA]-(gcin),
+(tds)<-[:ADA]-(gcin),
+(fc)<-[:ADA]-(gcin),
+(cmcp)-[:ADA]->(estmt),
+(estmt)-[:REST_API]->(cmcp),
+(sigplmsg)-[:REST_API]->(cmcp),
+(aos)-[:REST_API]->(sigplmsg)

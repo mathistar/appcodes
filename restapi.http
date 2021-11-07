@@ -1,0 +1,12 @@
+POST http://localhost:7687/movie
+Content-Type: application/json
+
+{
+  "query": {
+    "text": "match (p1:Person)-[:HAS_CONTACT]->(p2)-[:HAS_CONTACT]->(p3) where p1 <> p3 return p1, p2, p3 limit 2",
+    "parameters": {}
+  },
+  "queryType": "r"
+}
+
+###
