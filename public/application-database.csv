@@ -1,0 +1,6 @@
+code,name,application
+PG,Postgres,GCIN
+EDB,Postgres,CMCP
+PG,Postgres,SIGPLMSG
+MADB,Maria DB,ESTMT
+MODB,Mongo DB,CMCP

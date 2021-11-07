@@ -14,7 +14,7 @@ class AppCodeSearch extends Form {
   }
 
   state = {
-    data: { appcode: "GCIN"},
+    data: { appcode: ""},
     errors: {}
   };
 
@@ -26,8 +26,11 @@ class AppCodeSearch extends Form {
 
   draw = () => {
     const { appcode } = this.state.data;
-    const NEOVIS_DEFAULT_CONFIG = Symbol();
-    const cypherQuery = "MATCH (n)<-[r]->(m{code: '"+ appcode.toUpperCase() +"'}) RETURN *";
+    const cypherQuery = "MATCH (n)<-[r]->(m:Application{code: '"+ appcode.toUpperCase() +"'}) " +
+      "OPTIONAL MATCH (e:Environment{application: '"+ appcode.toUpperCase() +"'})<-[r1:ENV]-(n) " +
+      "OPTIONAL MATCH (a1:Application)<-[r2:SUBSCRIBE]-(n:Messaging)<-[r3:PUBLISH]-(m) " +
+      "OPTIONAL MATCH (a2:Application)-[r4:PUBLISH]->(n)-[r5:SUBSCRIBE]->(m) " +
+      "RETURN *";
     console.log (" cypher query - ", cypherQuery);
     const neoConfig = {
       ...this.config,
@@ -42,18 +45,82 @@ class AppCodeSearch extends Form {
             "code",
             "name"
           ]
+        },
+        Database: {
+          caption: "code",
+          font: {
+            size: 12,
+            color: "blue"
+          },
+          title_properties: [
+            "code",
+            "name"
+          ]
+        },
+        Environment: {
+          caption: "env",
+          font: {
+            size: 12,
+            color: "blue"
+          },
+          title_properties: [
+            "env",
+            "cpu",
+            "instance",
+            "memory",
+            "cost",
+            "space"
+          ]
+        },
+        Platform: {
+          caption: "code",
+          font: {
+            size: 12,
+            color: "blue"
+          },
+          title_properties: [
+            "code",
+            "name"
+          ]
+        },
+        Messaging: {
+          caption: "code",
+          font: {
+            size: 12,
+            color: "blue"
+          },
+          title_properties: [
+            "code",
+            "name"
+          ]
         }
       },
       relationships: {
-        REST_API: {
+        REST: {
           thickness: "0.5",
           caption: true
         },
-        KAFKA: {
+        FILE: {
           thickness: "0.5",
           caption: true
         },
-        ADA: {
+        STORES: {
+          thickness: "0.5",
+          caption: true
+        },
+        ENV: {
+          thickness: "0.5",
+          caption: false
+        },
+        RUNS: {
+          thickness: "0.5",
+          caption: true
+        },
+        PUBLISH: {
+          thickness: "0.5",
+          caption: true
+        },
+        SUBSCRIBE: {
           thickness: "0.5",
           caption: true
         }
