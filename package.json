@@ -18,6 +18,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "prestart": "cp ./src/custom-neovis-js/dist/neovis.js* ./node_modules/neovis.js/dist",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
